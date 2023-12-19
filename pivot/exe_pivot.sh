@@ -1,0 +1,39 @@
+python ../scripts/run_pivot.py \
+    --model_name_or_path Helsinki-NLP/opus-mt-en-de \
+    --do_train \
+    --do_eval \
+    --do_predict \
+    --source_lang src \
+    --target_lang tgt \
+    --output_dir ckpt/ \
+    --train_file ../dataset/iwslt2017-en_train.text \
+    --validation_file ../dataset/iwslt2017-en_valid.text \
+    --test_file ../dataset/iwslt2017-en_test.text \
+    --evaluation_strategy="steps" \
+    --save_strategy="steps" \
+    --eval_steps=4000 \
+    --save_steps=4000 \
+    --per_device_train_batch_size=8 \
+    --per_device_eval_batch_size=8 \
+    --overwrite_output_dir \
+    --predict_with_generate \
+    --num_beams=4 \
+    --generation_num_beams=4 \
+    --metric_for_best_mode="bleu" \
+    --load_best_model_at_end=True \
+    --greater_is_better=True \
+    --warmup_steps=4000 \
+    --label_smoothing_factor=0.1 \
+    --learning_rate=5e-4 \
+    --weight_decay=0.0001 \
+    --num_train_epochs=100 \
+    --gradient_accumulation_steps=8 \
+    --eval_accumulation_steps=8 \
+    --max_source_length=1024 \
+    --max_target_length=1024 \
+    --pad_to_max_length=True \
+    --source_spm ../spm/en_spm/64K_en.model \
+    --target_spm ../spm/en_spm/64K_en.model \
+    --vocab ../spm/en_spm/64K_en.json \
+    --model_max_length 1024 \
+    
